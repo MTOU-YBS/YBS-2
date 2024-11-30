@@ -59,3 +59,135 @@ package ogrenciNot;
         }
     }
 
+Soru 4
+
+class Node {
+        int data;
+        Node prev;
+        Node next;
+    
+        public Node(int data) {
+            this.data = data;
+            this.prev = null;
+            this.next = null;
+        }
+    }
+    
+    class StringLinkedList {
+        private Node head;
+
+        public void append(int data) {
+            Node newNode = new Node(data);
+            if (head == null) {
+                head = newNode;
+                return;
+            }
+            Node current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = newNode;
+            newNode.prev = current;
+        }
+    
+
+        public void deleteSecondLast() {
+            if (head == null || head.next == null) {
+                System.out.println("Liste yeterince eleman içermiyor.");
+                return;
+            }
+    
+            Node current = head;
+            while (current.next != null && current.next.next != null) {
+                current = current.next;
+            }
+    
+            if (current.prev != null) { 
+                Node secondLast = current; 
+                secondLast.prev.next = secondLast.next; 
+                if (secondLast.next != null) {
+                    secondLast.next.prev = secondLast.prev; 
+                }
+            }
+        }
+    
+
+        public void printList() {
+            Node current = head;
+            while (current != null) {
+                System.out.print(current.data + " ");
+                current = current.next;
+            }
+            System.out.println();
+        }
+    
+        public static void main(String[] args) {
+            StringLinkedList dll = new StringLinkedList();
+            dll.append(25);
+            dll.append(50);
+            dll.append(75);
+            dll.append(100);
+    
+            System.out.println("Orijinal liste :");
+            dll.printList();
+    
+            dll.deleteSecondLast();
+    
+            System.out.println("Sondan bir önceki düğüm silindikten sonra :");
+            dll.printList();
+        }
+    }
+
+soru 5
+
+class Node {
+    int data;
+    Node next;
+
+    
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+public class bL {
+   
+    public static Node reverseAndCreateNewList(Node head) {
+        Node newHead = null; 
+        while (head != null) {
+            Node newNode = new Node(head.data); 
+            newNode.next = newHead; 
+            newHead = newNode;
+            head = head.next; 
+        }
+        return newHead;
+    }
+
+    
+    public static void printList(Node head) {
+        while (head != null) {
+            System.out.print(head.data + " -> ");
+            head = head.next;
+        }
+        System.out.println("null");
+    }
+
+    public static void main(String[] args) {
+     
+        Node head = new Node(1);
+        head.next = new Node(2);
+        head.next.next = new Node(3);
+        head.next.next.next = new Node(4);
+
+        System.out.println("Orijinal Liste :");
+        printList(head);
+
+      
+        Node reversedList = reverseAndCreateNewList(head);
+
+        System.out.println("Ters Çevrilmiş Yeni Liste :");
+        printList(reversedList);
+    }
+}
+
